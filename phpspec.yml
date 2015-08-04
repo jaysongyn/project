@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: Dmed
+        psr4_prefix: Dmed
+        src_path: app
