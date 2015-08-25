@@ -11,13 +11,19 @@ class Empresa extends Model implements Transformable
     use TransformableTrait;
 
     protected $fillable = [
-        'nome',
+        'cliente_id',
+        'name',
         'cnpj'
     ];
 
     public function cliente()
     {
         return $this->belongsTo(Cliente::class);
+    }
+
+    public function notas()
+    {
+        return $this->hasMany(Nota::class);
     }
 
 }

@@ -18,6 +18,5 @@ class EmpresaValidator extends LaravelValidator
         'cliente_id' => 'required',
         'name' => 'required|max:255',
         'cnpj' => 'required|max:14',
-
     ];
 }

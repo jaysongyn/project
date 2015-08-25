@@ -37,6 +37,10 @@ class DmedtRepositoryProvider extends ServiceProvider
             \Dmed\Repositories\UserRepository::class,
             \Dmed\Repositories\UserRepositoryEloquent::class
         );
+        $this->app->bind(
+            \Dmed\Repositories\NotaRepository::class,
+            \Dmed\Repositories\NotaRepositoryEloquent::class
+        );
 
     }
 }

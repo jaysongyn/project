@@ -28,7 +28,7 @@ return [
     |
     */
 
-    'model' => Dmed\User::class,
+    'model' => Dmed\Entities\User::class,
 
     /*
     |--------------------------------------------------------------------------
@@ -48,7 +48,7 @@ return [
     | Password Reset Settings
     |--------------------------------------------------------------------------
     |
-    | Here you may set the options for resetting passwords including the view
+    | Here you may set the options for resetting passwords including the views
     | that is your password reset e-mail. You can also set the name of the
     | table that maintains all of the reset tokens for your application.
     |

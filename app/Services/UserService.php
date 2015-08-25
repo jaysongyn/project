@@ -21,10 +21,10 @@ class UserService
         $this->repository = $repository;
     }
 
-    public function index($with = [])
+    public function getAll($id,$with = [])
     {
         try{
-            return  $this->repository->with($with)->all();
+            return  $this->repository->with($with)->findWhere(['cliente_id' => $id]);
 
         }catch (ValidatorException $e){
             return [
@@ -39,7 +39,7 @@ class UserService
         }
     }
 
-    public function show($id, $with = [])
+    public function getUser($id, $with = [])
     {
 
         try{
@@ -51,6 +51,42 @@ class UserService
             return [
                 'error' => true,
                 'message' => 'Cliente nao cadastrado id:'.$id
+            ];
+        }
+    }
+
+    public function store(array $data)
+    {
+        try{
+            $data['cliente_id'] = 2;
+
+            //$this->validator->with($data)->passesOrFail();
+
+           return $this->repository->create($data);
+
+            return [
+                'sucess' => true,
+                'message' => 'Usuário '.$user->name.' cadastrada com sucesso!'
+            ];
+
+        }catch (ValidatorException $e){
+            return [
+                'error' => true,
+                'message' => $e->getMessageBag()
+            ];
+        }
+    }
+
+    public function update($data,$id)
+    {
+        try{
+            $this->repository->update($data, $id);
+
+
+        }catch (ValidatorException $e){
+            return [
+                'error' => true,
+                'message' => $e->getMessageBag()
             ];
         }
     }
@@ -80,6 +116,8 @@ class UserService
 
                 $user->empresas()->detach($data['empresa_id']);
 
+                return $user->id;
+
             }else{
                 return [
                     'error' => true,
@@ -97,7 +135,7 @@ class UserService
         }
     }
 
-    public function addEmpresa($data)
+    public function addEmpresaStore($data)
     {
         try{
             if($this->hasEmpresa($data))
@@ -109,12 +147,33 @@ class UserService
             }
             $user = $this->repository->find($data['user_id']);
             $user->empresas()->attach($data['empresa_id']);
-            return $user;
+            return $user->id;
 
         }catch (ValidatorException $e){
             return [
                 'error' => true,
                 'message' => $e->getMessageBag()
+            ];
+        }
+    }
+
+    public function destroy($id)
+    {
+        try{
+
+            $this->repository->find($id)->delete();
+
+            return ['deleted' => 'true'];
+
+        }catch (ModelNotFoundException $e){
+            return [
+                'error' => true,
+                'message' => 'No data found for id:'.$id
+            ];
+        }catch (QueryException $e){
+            return [
+                'error' => true,
+                'message' => 'You cannot delete this data, there is register related!'
             ];
         }
     }

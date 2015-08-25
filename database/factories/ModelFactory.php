@@ -21,6 +21,7 @@ $factory->define(Dmed\Entities\User::class, function ($faker) {
     ];
 });
 
+/** @var TYPE_NAME $factory */
 $factory->define(Dmed\Entities\Cliente::class, function ($faker) {
     return [
         'name' => $faker->name,
@@ -42,6 +43,23 @@ $factory->define(Dmed\Entities\UserEmpresa::class, function ($faker) {
 
         'user_id' => $faker->numberBetween('1', '10'),
         'empresa_id' => $faker->numberBetween('1', '10')
+
+    ];
+});
+
+/** @var TYPE_NAME $factory */
+$factory->define(Dmed\Entities\Nota::class, function ($faker) {
+    return [
+        'numero' => $faker->numberBetween('3588', '48889'),
+        'empresa_id' => $faker->numberBetween('1', '10'),
+        'data_emissao' => $faker->DateTime(),
+        'valor' => $faker->randomFloat('2'),
+        'discriminacao' => $faker->text(),
+        'cpf_tomador' => $faker->numberBetween('10000000000', '99999999999'),
+        'nome_tomador' => $faker->name(),
+        'cpf_tomador' =>  $faker->numberBetween('10000000000', '99999999999'),
+        'nome_dependente' => $faker->name(),
+        'data_nasc_dependente' => $faker->date()
 
     ];
 });

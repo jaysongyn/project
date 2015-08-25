@@ -27,4 +27,5 @@ class Cliente extends Model implements Transformable
         return $this->hasMany(Empresa::class);
     }
 
+
 }

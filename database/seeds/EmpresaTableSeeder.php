@@ -12,6 +12,6 @@ class EmpresaTableSeeder extends Seeder
     public function run()
     {
         \Dmed\Entities\Empresa::truncate();
-        factory(\Dmed\Entities\Empresa::class,10)->create();
+        factory(\Dmed\Entities\Empresa::class,50)->create();
     }
 }

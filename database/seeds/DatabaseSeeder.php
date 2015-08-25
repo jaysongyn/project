@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call(EmpresaTableSeeder::class);
         $this->call(UserTableSeeder::class);
         $this->call(UserEmpresaTableSeeder::class);
+        $this->call(NotaTableSeeder::class);
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
         Model::reguard();
     }

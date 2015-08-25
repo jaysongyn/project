@@ -2,6 +2,8 @@
 
 namespace Dmed\Repositories;
 
+use Dmed\Presenters\EmpresaPresenter;
+use Dmed\Validators\EmpresaValidator;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Dmed\Entities\Empresa;

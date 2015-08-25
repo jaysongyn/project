@@ -26,10 +26,11 @@ class EmpresaService
         $this->validator = $validator;
     }
 
-    public function index($with = [])
+    public function getAll($id, $with = [])
     {
         try{
-            return  $this->repository->with($with)->all();
+
+            return $this->repository->with($with)->findWhere(['cliente_id' => $id]);
 
         }catch (ValidatorException $e){
             return [
@@ -44,7 +45,7 @@ class EmpresaService
         }
     }
 
-    public function show($id, $with = [])
+    public function getEmpresa($id, $with = [])
     {
 
         try{
@@ -89,9 +90,15 @@ class EmpresaService
     public function store(array $data)
     {
         try{
-            $this->validator->with($data)->passesOrFail();
+           $data['cliente_id'] = 2;
 
-            return $this->repository->create($data);
+            //$this->validator->with($data)->passesOrFail();
+
+             $empresa = $this->repository->create($data);
+            return [
+                'sucess' => true,
+                'message' => 'Empresa '.$empresa->name.' cadastrada com sucesso!'
+            ];
 
         }catch (ValidatorException $e){
             return [
@@ -107,12 +114,12 @@ class EmpresaService
      * @return array
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function update(array $data, $id)
+    public function update($data, $id)
     {
         try{
-            $this->validator->with($data)->passesOrFail();
+            //$this->validator->with($data)->passesOrFail();
 
-            return $this->repository->update($data, $id);
+             $this->repository->update($data, $id);
 
         }catch (ValidatorException $e){
             return [
